@@ -1,6 +1,8 @@
 //17.8
 
 var http = require('http');
+var fs = require('fs');
+
 
 var server = http.createServer();
 
