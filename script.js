@@ -7,14 +7,15 @@ var fs = require('fs');
 var server = http.createServer();
 
 server.on('request', function(request, response) {
-    response.setHeader("Content-Type", "text/html; charset=utf-8");
-    if (request.method === 'GET' && request.url === '/hello' && request.url === '/') {
-        response.write(fs.readFileSync('./index.html', function(err, data) {
-            console.log(data);
-        }));
+
+    if (request.method === 'GET' && request.url === '/') {
+        response.setHeader("Content-Type", "text/html; charset=utf-8");
+        response.write(fs.readFileSync('./index.html'))
+        response.end();
     } else {
+        response.setHeader("Content-Type", "image/jpeg");
         response.statusCode = 404;
-        response.write('<h1>404: Bardzo Zła ścieżka!</h1><img src="sad-face.jpg">');
+        response.write(fs.readFileSync('./sad-face.jpg'))
         response.end();
     }
 });
